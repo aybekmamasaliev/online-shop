@@ -7,12 +7,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from '../components/register/register/register.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from '../store/reducers';
+import { AuthService } from './services/auth.service';
+import { EffectsModule } from '@ngrx/effects';
+import { RegisterEffect } from '../store/effects/register.effect';
 
 
 const routes: Routes = [{ path: 'register', component: RegisterComponent }];
 
 @NgModule({
   declarations: [RegisterComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), ReactiveFormsModule, StoreModule.forFeature('auth', reducers)],
+  providers: [AuthService],
+  imports: [CommonModule,
+    RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    StoreModule.forFeature('auth', reducers),
+    EffectsModule.forFeature([RegisterEffect])
+  ],
+
 })
-export class AuthModule {}
+export class AuthModule { }
