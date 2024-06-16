@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { registerAction, registerFailureAction, registerSuccessAction } from "../actions/register.action";
 import { catchError, map, of, switchMap } from "rxjs";
 import { AuthService } from "../../auth/services/auth.service";
-import { CurrentUserIntrface } from "../../../shared/types/currentUser.interface";
+import { CurrentUserInterface } from "../../../shared/types/currentUser.interface";
 
 
 @Injectable()
@@ -13,7 +13,7 @@ export class RegisterEffect {
         ofType(registerAction),
         switchMap(({ request }) => {
             return this.authService.register(request).pipe(
-                map((currentUser: CurrentUserIntrface) => {
+                map((currentUser: CurrentUserInterface) => {
                     return registerSuccessAction({ currentUser })
                 }), 
                 

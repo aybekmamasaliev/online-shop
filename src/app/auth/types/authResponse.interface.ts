@@ -1,5 +1,5 @@
-import { CurrentUserIntrface } from "../../shared/types/currentUser.interface";
+import { CurrentUserInterface } from "../../shared/types/currentUser.interface";
 
 export interface AuthResponseInterface{
-    user:CurrentUserIntrface
+    user:CurrentUserInterface
 }

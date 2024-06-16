@@ -1,4 +1,4 @@
 export const environment = {
-    production:false,
-    apiUrl:'https://conduit.productionready.io'
-}
+    production: false,
+    apiUrl: 'https://api.realworld.io/api/articles'
+};
