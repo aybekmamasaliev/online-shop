@@ -9,6 +9,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from './environment/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
+import { TopBarModule } from './shared/modules/topBar/topBar.module';
+import { TopBarComponent } from './shared/modules/topBar/components/topBar/topBar.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,12 +19,14 @@ import { EffectsModule } from '@ngrx/effects';
     AppRoutingModule,
     HttpClientModule,
     AuthModule,
+    TopBarModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Количество сохраненных состояний
       logOnly: environment.production
     }),
+    TopBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
