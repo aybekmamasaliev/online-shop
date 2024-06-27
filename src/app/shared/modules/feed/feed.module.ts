@@ -6,15 +6,20 @@ import { GetFeedEffect } from './store/effects/getFeed.effect';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/reducers';
 import { FeedService } from './services/feed.service';
+import { RouterModule } from '@angular/router';
+import { ErrorMessageModule } from '../errorMessage/errormessage.module';
+import { LoadingModule } from '../loading/loading.module';
 
 @NgModule({
   declarations: [FeedComponent],
   imports: [
     CommonModule,
-
+    RouterModule,
     EffectsModule.forFeature([GetFeedEffect]),
 
-    StoreModule.forFeature('feed', reducers)
+    StoreModule.forFeature('feed', reducers),
+    ErrorMessageModule,
+    LoadingModule
   ],
   exports: [FeedComponent],
   providers: [
