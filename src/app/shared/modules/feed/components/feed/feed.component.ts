@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import { FeedStateInterface } from "../../types/feedState.interface";
 import { getFeedAction } from "../../store/actions/getFeed.action";
@@ -17,7 +17,7 @@ import queryString from "query-string";
     styleUrls: ["./feed.component.css"]
 })
 
-export class FeedComponent implements OnInit , OnDestroy{
+export class FeedComponent implements OnInit, OnDestroy, OnChanges {
 
     @Input("apiUrl") apiUrlProps: string
 
@@ -26,18 +26,32 @@ export class FeedComponent implements OnInit , OnDestroy{
     error$: Observable<string | null>
     feed$: Observable<GetFeedResponseInterface | null>
     limit = environment.limit
-    baseUrl:string
-    queryParamSubscription:Subscription
-    currentPage:number
+    baseUrl: string
+    queryParamSubscription: Subscription
+    currentPage: number
 
     constructor(
         private store: Store<AppStateInterface>,
-        private router: Router, 
-        private route: ActivatedRoute) {}
+        private router: Router,
+        private route: ActivatedRoute) { }
 
     ngOnInit(): void {
         this.initializeValues()
         this.initializeListenrs()
+        console.log("init feed")
+    }
+
+
+    ngOnChanges(changes: SimpleChanges): void {
+        console.log(changes)
+        const isApiUrlChanged = !changes['apiUrlProps'].firstChange && 
+        changes['apiUrlProps'].currentValue !== changes['apiUrlProps'].previousValue
+
+        if(isApiUrlChanged){
+            this.fetchFeed()
+        }
+
+        console.log(isApiUrlChanged)
     }
 
     ngOnDestroy(): void {
@@ -52,8 +66,8 @@ export class FeedComponent implements OnInit , OnDestroy{
         this.baseUrl = this.router.url.split('?')[0]
     }
 
-    initializeListenrs():void{
-        this.queryParamSubscription = this.route.queryParams.subscribe((params:Params)=>{
+    initializeListenrs(): void {
+        this.queryParamSubscription = this.route.queryParams.subscribe((params: Params) => {
             console.log(params)
             this.currentPage = Number(params["page"] || "1")
 
@@ -66,7 +80,7 @@ export class FeedComponent implements OnInit , OnDestroy{
         const offset = this.currentPage * this.limit - this.limit
         const parsedUrl = queryString.parseUrl(this.apiUrlProps);
         const stringifiedParams = queryString.stringify({
-            limit:this.limit,
+            limit: this.limit,
             offset,
             ...parsedUrl.query
         })
