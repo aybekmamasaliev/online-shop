@@ -15,7 +15,7 @@
                     </span>
                 </div>
                 <span *ngIf="isAuthor$ | async">
-                    <a [routerLink]="['/article', article.slug, 'edit']" class="btn btn-outline-secondary btn-sm">
+                    <a [routerLink]="['/articles', article.slug, 'edit']" class="btn btn-outline-secondary btn-sm">
                         <i class="ion-edit"></i>
                         Edit Article
                     </a>
@@ -26,8 +26,8 @@
             </div>
         </div>
         <div class="container page">
-            <mc-loading *ngIf="isLoading$ |async"></mc-loading>
-            <mc-error-message *ngIf="error$ |async"></mc-error-message>
+            <mc-loading *ngIf="isLoading$ | async"></mc-loading>
+            <mc-error-message *ngIf="error$ | async"></mc-error-message>
 
             <div class="row article-content" *ngIf="article">
                 <div class="col-xs-12">

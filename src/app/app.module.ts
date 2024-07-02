@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth/auth.module';
@@ -18,6 +17,7 @@ import { YourFeedModule } from './yourFeed/yourFeed.module';
 import { TagFeedModule } from './tagFeed/tagFeed.module';
 import { ArticleModule } from './article/article.module';
 import { CreateArticleModule } from './createArticle/createArticle.module';
+import { EditArticleModule } from './editArticle/editArticle.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,7 +42,8 @@ import { CreateArticleModule } from './createArticle/createArticle.module';
     YourFeedModule,
     TagFeedModule,
     CreateArticleModule,
-    ArticleModule
+    EditArticleModule,
+    ArticleModule,
     
   ],
   providers: [
