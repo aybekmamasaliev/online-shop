@@ -1,40 +1,68 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { CreateArticleStateInterface } from "../../types/editArticleState.interface";
-import { createArticleAction, createArticleSuccessAction, createArticleFailureAction } from "../actions/createArticle.action";
+import { EditArticleStateInterface } from "../../types/editArticleState.interface";
+import { updateArticleAction, updateArticleFailureAction, updateArticleSuccessAction } from "../actions/updateArticle.action";
+import { getArticleAction, getArticleFailureAction, getArticleSuccessAction } from "../../../article/store/actions/getArticle.action";
 
-const initialState: CreateArticleStateInterface = {
+const initialState: EditArticleStateInterface = {
     isSubmitting:false,
-    validationErrors:null
+    validationErrors:null,
+    isLoading:false,
+    article:null
 }
 
-const createArticleReducer = createReducer(
+const editArticleReducer = createReducer(
     initialState,
     on(
-        createArticleAction, 
-        (state): CreateArticleStateInterface =>({
+        updateArticleAction, 
+        (state): EditArticleStateInterface =>({
             ...state,
             isSubmitting:true
         })
     ),
 
     on(
-        createArticleSuccessAction, 
-        (state): CreateArticleStateInterface =>({
+        updateArticleSuccessAction, 
+        (state): EditArticleStateInterface =>({
             ...state,
             isSubmitting:false
         })
     ),
 
     on(
-        createArticleFailureAction, 
-        (state, action): CreateArticleStateInterface =>({
+        updateArticleFailureAction, 
+        (state, action): EditArticleStateInterface =>({
             ...state,
             isSubmitting:false,
             validationErrors: action.errors
         })
+    ),
+
+    on(
+        getArticleAction, 
+        (state): EditArticleStateInterface =>({
+            ...state,
+            isLoading:true
+        })
+    ),
+
+    on(
+        getArticleSuccessAction, 
+        (state, action): EditArticleStateInterface =>({
+            ...state,
+            isLoading:false,
+            article:action.article
+        })
+    ),
+
+    on(
+        getArticleFailureAction, 
+        (state): EditArticleStateInterface =>({
+            ...state,
+            isLoading:false
+        })
     )
 )
 
-export function reducers(state: CreateArticleStateInterface, action: Action){
-    return createArticleReducer(state, action)
+export function reducers(state: EditArticleStateInterface, action: Action){
+    return editArticleReducer(state, action)
 }

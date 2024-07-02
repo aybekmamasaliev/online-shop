@@ -10,12 +10,9 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 
 export class ArticleFormComponent implements OnInit {
 
-    @Input('initialValues') initialValuesProps: ArticleInputInterface
-
+    @Input('initialValues') initialValuesProps: any
     @Input('isSubmitting') isSubmittingProps: boolean | null
-
     @Input('errors') errorProps: BackendErrorInterface | null
-
     @Output('articleSubmit') articleSubmitEvent = new EventEmitter<ArticleInputInterface>()
 
     form: FormGroup
