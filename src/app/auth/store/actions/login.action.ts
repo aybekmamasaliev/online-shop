@@ -4,6 +4,7 @@ import { LoginRequestInterface } from "../../types/loginRequest.interface";
 import { CurrentUserInterface } from "../../../shared/types/currentUser.interface";
 import { BackendErrorInterface } from "../../../shared/types/backendErrorsInterface.interface";
 
+
 export const loginAction = createAction(
     ActionTypes.LOGIN,
     props<{request:LoginRequestInterface}>()
