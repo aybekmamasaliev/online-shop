@@ -6,6 +6,7 @@
             <a [routerLink]="['/profiles', article.author.username]">
                 <img [src]="article.author.image" alt="" />
             </a>
+
             <div class="info">
 
                 <a [routerLink]="['/profiles', article.author.username]">
@@ -23,12 +24,6 @@
             <mc-tag-list [tags]="article.tagList"></mc-tag-list>
         </a>
     </div>
-    <mc-pagination 
-    [total]="(feed$ | async)?.articlesCount" 
-    [limit]="limit" 
-    [url]="baseUrl" 
-    [currentPage]="currentPage"></mc-pagination>
+    <mc-pagination [total]="(feed$ | async)?.articlesCount" [limit]="limit" [url]="baseUrl"
+        [currentPage]="currentPage"></mc-pagination>
 </div>
-
-
-
